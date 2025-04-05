@@ -38,3 +38,31 @@ $(document).ready(function() {
     
 //     window.requestAnimationFrame(scrollPlay);
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  function isIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  }
+
+  if (isIOS()) {
+    return; // Skip video observer on iOS devices
+  }
+
+  const videos = document.querySelectorAll('.carousel-video');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+
+      if (entry.isIntersecting) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, {
+    threshold: 0.6
+  });
+
+  videos.forEach(video => observer.observe(video));
+});
