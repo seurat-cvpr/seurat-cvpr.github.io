@@ -66,3 +66,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
   videos.forEach(video => observer.observe(video));
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    function isIOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    }
+
+    if (!isIOS()) {
+        const video = document.querySelector('.autoplay-video');
+        if (video) {
+        video.play().catch(() => {
+            console.warn('Autoplay blocked by browser');
+        });
+        }
+    }
+});

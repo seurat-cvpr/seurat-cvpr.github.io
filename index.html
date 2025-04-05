@@ -50,7 +50,7 @@
 </script>
 
 <body>
-  <div class="container" id="header" style="text-align: center; margin: auto;">
+<div class="container" id="header" style="text-align: center; margin: 25px auto 0 auto;"></div>
     <div class="row" id="title-row" style="margin:10px auto;">
       <h2 class="col-md-12 text-center" id="title" style="margin: 0;">
         <img src="img/logo.png" alt="Logo" style="height: 60px; min-width: 60px; margin-right: 10px; margin-bottom: 5px;">
@@ -127,7 +127,7 @@
         <div class="text-center">
           <img src="./img/teaser.png" width="100%">
         </div>
-        <div class="text-justify">
+        <div class="text-center"></div>
           <strong>TL;DR:</strong> Seurat predicts precise and smooth depth changes for dynamic objects by only looking at the 2D point trajectories.
         </div>
       </div>
@@ -136,9 +136,9 @@
     <div class="row" style="margin-top:20px;">
       <div class="col-md-8 offset-md-2">
         <h3>Motivation</h3>
-        <video controls width="100%">
-          <source src="videos/car-moves.mp4" type="video/mp4">
-          Your browser does not support the video tag.
+        <video class="autoplay-video" controls muted loop playsinline width="100%">
+            <source src="videos/car-moves.mp4" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
         <p class="text-justify">
           By only looking at the tracked points, we can easily perceive that the object (here, a car) is moving away.
