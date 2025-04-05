@@ -1,1 +1,1 @@
-# LocoTrack
+# Seurat Project Page
