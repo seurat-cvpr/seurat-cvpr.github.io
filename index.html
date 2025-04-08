@@ -1,40 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Seurat: From Moving Points to Depth</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
+  <!-- Open Graph tags -->
   <meta property="og:image" content="img/logo.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="seurat-cvpr.github.io.git">
+  <meta property="og:url" content="https://seurat-cvpr.github.io">
   <meta property="og:title" content="Seurat: From Moving Points to Depth">
   <meta property="og:description" content="">
 
   <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" 
+    crossorigin="anonymous"
+  >
 
-  <!-- Font Awesome, Codemirror, and custom CSS remain the same -->
-  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <!-- Font Awesome, Codemirror, custom CSS, and Bootstrap icons -->
+  <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="css/codemirror.min.css">
   <link rel="stylesheet" href="css/app.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" 
+    rel="stylesheet"
+  >
+  
   <link rel="icon" type="image/png" href="index/logo.png">
 
-  <!-- jQuery: Keep if needed by other scripts -->
+  <!-- jQuery (if other scripts need it) -->
   <script src="js/jquery.min.js"></script>
-  
-  <!-- Bootstrap 5 JS Bundle (includes Popper) -->
-  <!-- <script src="js/bootstrap.bundle.min.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
-  <!-- Other scripts remain the same -->
+  <!-- Bootstrap 5 JS Bundle (includes Popper) -->
+  <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" 
+    crossorigin="anonymous">
+  </script>
+
+  <!-- Other scripts -->
   <script src="js/codemirror.min.js"></script>
   <script src="js/clipboard.min.js"></script>
   <script src="js/video_comparison.js"></script>
@@ -51,46 +63,45 @@
 </script>
 
 <body>
-<div class="container" id="header" style="text-align: center; margin: 25px auto 0 auto;"></div>
-    <div class="row" id="title-row" style="margin:10px auto; text-align: center;">
-      <h2 class="col-md-12 d-flex justify-content-center align-items-center" id="title" style="margin: 0;">
-        <img src="img/logo.png" alt="Logo" style="height: 60px; min-width: 60px; margin-right: 10px; margin-left: 10px;">
+  <div class="container text-center my-4" id="header">
+    <div class="row" id="title-row">
+      <h2 class="col-md-12 d-flex justify-content-center align-items-center m-0" id="title">
+        <img src="img/logo.png" alt="Logo" style="height: 60px; min-width: 60px; margin: 0 10px;">
         <span>Seurat: From Moving Points to Depth</span>
       </h2>
     </div>
-    <div class="row" id="venue-row" style="margin:10px auto;">
-      <h4 class="col-md-12 text-center">
-        CVPR 2025 Highlight<br>
-      </h4>
+    <div class="row my-3" id="venue-row">
+      <h4 class="col-md-12 text-center">CVPR 2025 Highlight</h4>
     </div>
-    <div class="row" id="author-row" style="margin:10px auto;">
-    <div class="col-md-12 text-center" style="display: table; margin:0 auto;">
-      <a style="text-decoration:none" href="https://seokju-cho.github.io/">
-        Seokju&nbsp;Cho<sup>1</sup>
-      </a>
-      <span style="padding-left: 20px;"></span>
-      <a style="text-decoration:none" href="https://gabriel-huang.github.io">
-        Jiahui&nbsp;Huang<sup>2</sup>
-      </a>
-      <span class="d-none d-md-inline" style="padding-left: 20px;"></span>
-      <br class="d-md-none">
-      <a style="text-decoration:none" href="https://cvlab.kaist.ac.kr">
-        Seungryong&nbsp;Kim<sup>1</sup>
-      </a>
-      <span style="padding-left: 20px;"></span>
-      <a style="text-decoration:none" href="http://joonyoung-cv.github.io">
-        Joon-Young&nbsp;Lee<sup>2</sup>
-      </a>
+    <div class="row my-3" id="author-row">
+      <div class="col-md-12 text-center">
+        <a href="https://seokju-cho.github.io/" class="text-decoration-none">
+          Seokju&nbsp;Cho<sup>1</sup>
+        </a>
+        <span class="mx-3"></span>
+        <a href="https://gabriel-huang.github.io" class="text-decoration-none">
+          Jiahui&nbsp;Huang<sup>2</sup>
+        </a>
+        <span class="mx-3 d-none d-md-inline"></span>
+        <br class="d-md-none">
+        <a href="https://cvlab.kaist.ac.kr" class="text-decoration-none">
+          Seungryong&nbsp;Kim<sup>1</sup>
+        </a>
+        <span class="mx-3"></span>
+        <a href="http://joonyoung-cv.github.io" class="text-decoration-none">
+          Joon-Young&nbsp;Lee<sup>2</sup>
+        </a>
+      </div>
     </div>
-    </div>
-    <div class="row" id="author-row" style="margin:10px auto;">
-      <div class="col-md-12 text-center" style="display: table; margin:0 auto;">
+    <div class="row" id="affiliation-row">
+      <div class="col-md-12 text-center">
         <sup>1</sup> KAIST AI
-        <span style="padding-left: 20px;"></span>
+        <span class="mx-3"></span>
         <sup>2</sup> Adobe Research
       </div>
     </div>
   </div>
+
   <script>
     // Keep this simple inline JS if you rely on it
     document.getElementById('author-row').style.maxWidth =
@@ -98,25 +109,24 @@
   </script>
 
   <div class="container" id="main">
-    <div class="row">
-      <!-- Use offset classes in Bootstrap 5: offset-sm-3 -->
+    <div class="row mb-4">
       <div class="col-sm-6 offset-sm-3 text-center">
         <ul class="nav nav-pills nav-justified">
           <li class="nav-item">
             <a class="nav-link" href="paper.pdf">
-              <img src="./img/paper_image.png" height="60px">
+              <img src="./img/paper_image.png" style="height: 60px;">
               <h4><strong>Paper</strong></h4>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://cvlab.kaist.ac.kr" target="_blank">
-              <img src="img/github.png" height="60px">
+              <img src="img/github.png" style="height: 60px;">
               <h4><strong>Code (TBD)</strong></h4>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://huggingface.co/spaces/hamacojr/LocoTrack" target="_blank">
-              <img src="img/huggingface_logo-noborder.svg" height="60px">
+              <img src="img/huggingface_logo-noborder.svg" style="height: 60px;">
               <h4><strong>Demo (TBD)</strong></h4>
             </a>
           </li>
@@ -124,158 +134,156 @@
       </div>
     </div>
 
-    <div class="row" style="margin-top:20px;">
-      <div class="col-md-8 offset-md-2">
-        <div class="text-center">
-          <img src="./img/teaser.png" width="100%">
-        </div>
-        <div class="text-center"></div>
+    <!-- Teaser -->
+    <div class="row mb-5">
+      <div class="col-md-8 offset-md-2 text-center">
+        <img src="./img/teaser.png" class="img-fluid" alt="Teaser Image">
+        <div class="text-justify mt-3">
           <strong>TL;DR:</strong> Seurat predicts precise and smooth depth changes for dynamic objects by only looking at the 2D point trajectories.
         </div>
       </div>
     </div>
 
-    <div class="row" style="margin-top:40px;">
-        <div class="col-md-8 offset-md-2">
-          <h3>Abstract</h3>
-          <p class="text-justify">
-            Accurate depth estimation from monocular videos remains challenging due to ambiguities inherent in single-view geometry, as crucial depth cues like stereopsis are absent. However, humans often perceive relative depth intuitively by observing variations in the size and spacing of objects as they move. Inspired by this, we propose a novel method that infers relative depth by examining the spatial relationships and temporal evolution of a set of tracked 2D trajectories. Specifically, we use off-the-shelf point tracking models to capture 2D trajectories. Then, our approach employs spatial and temporal transformers to process these trajectories and directly infer depth changes over time. Evaluated on the TAPVid-3D benchmark, our method demonstrates <strong>robust zero-shot performance</strong>, generalizing effectively from synthetic to real-world datasets. Results indicate that our approach achieves temporally smooth, high-accuracy depth predictions across diverse domains.
-          </p>
-        </div>
-      </div>
-
-    <div class="row" style="margin-top:40px;">
+    <!-- Abstract -->
+    <div class="row mb-5">
       <div class="col-md-8 offset-md-2">
-        <h3>Motivation</h3>
-        <div style="border: 2px solid lightgray; padding: 2px; display: inline-block;">
-            <video class="autoplay-video" controls muted loop playsinline width="100%">
-                <source src="videos/car-moves.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        
-        <p class="text-center">
-            Can you tell whether the object is moving farther or closer just by looking at the trajectory?
-            <br>
-            By only looking at the tracked points (right), we can easily perceive that the object (here, a car) is moving away.
-        </br><strong style="color: #ff5733;">If we can, so can our model!</strong>
+        <h3>Abstract</h3>
+        <p class="text-justify">
+          Accurate depth estimation from monocular videos remains challenging due to ambiguities inherent in single-view geometry, as crucial depth cues like stereopsis are absent. However, humans often perceive relative depth intuitively by observing variations in the size and spacing of objects as they move. Inspired by this, we propose a novel method that infers relative depth by examining the spatial relationships and temporal evolution of a set of tracked 2D trajectories. Specifically, we use off-the-shelf point tracking models to capture 2D trajectories. Then, our approach employs spatial and temporal transformers to process these trajectories and directly infer depth changes over time. Evaluated on the TAPVid-3D benchmark, our method demonstrates <strong>robust zero-shot performance</strong>, generalizing effectively from synthetic to real-world datasets. Results indicate that our approach achieves temporally smooth, high-accuracy depth predictions across diverse domains.
         </p>
       </div>
     </div>
 
-
-    <div class="row" style="margin-top:40px;">
-        <div class="col-md-8 offset-md-2">
-            <h3>Method</h3>
-            <div class="text-center">
-                <img src="img/Arch_ProjectPage.png" alt="Architecture Diagram" style="width: 100%; margin-top: 20px;">
-            </div>
-
-            <ul class="text-justify"></ul>
-                <li>Use an <strong>off-the-shelf point tracker</strong> to extract 2D trajectories of query points and a dense supporting grid.</li>
-                <li>Process these trajectories with <strong>a temporal transformer</strong> and <strong>a spatial transformer</strong> in two separate branches.</li>
-                <li>Inject motion information encoded by the supporting branch into the query branch via cross-attention.</li>
-                <li>Finally, use two regression heads to output ratio depths of both supporting and query trajectories.</li>
-            </ul>
+    <!-- Motivation -->
+    <div class="row mb-5">
+      <div class="col-md-8 offset-md-2">
+        <h3>Motivation</h3>
+        <div class="border border-light p-2 d-inline-block">
+          <video class="autoplay-video" controls muted loop playsinline style="width:100%;">
+            <source src="videos/car-moves.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
+        <p class="text-center mt-3">
+          Can you tell whether the object is moving farther or closer just by looking at the trajectory?
+          <br>
+          By only looking at the tracked points (right), we can easily perceive that the object (here, a car) is moving away.
+          </br>
+          <strong>If we can, so can our model!</strong>
+        </p>
       </div>
-
-
-    <!-- Updated carousel markup -->
-    <div class="row" style="margin-top: 40px;">
-        <div class="col-md-8 offset-md-2">
-            <h3>Visualization on DAVIS Dataset</h3>
-            <div id="resultsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <video class="carousel-video video-90" controls muted loop playsinline>
-                    <source src="./videos/bear.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="carousel-item">
-                    <video class="carousel-video video-90" controls muted loop playsinline>
-                    <source src="./videos/breakdance.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="carousel-item">
-                    <video class="carousel-video video-90" controls muted loop playsinline>
-                    <source src="./videos/dance.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="carousel-item">
-                    <video class="carousel-video video-90" controls muted loop playsinline>
-                    <source src="./videos/horsejump.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="carousel-item">
-                    <video class="carousel-video video-90" controls muted loop playsinline>
-                    <source src="./videos/rhino.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="carousel-item">
-                    <video class="carousel-video video-90" controls muted loop playsinline>
-                    <source src="./videos/skate.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="carousel-item">
-                    <video class="carousel-video video-90" controls muted loop playsinline>
-                    <source src="./videos/stroller.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="carousel-item">
-                    <video class="carousel-video video-90" controls muted loop playsinline>
-                    <source src="./videos/swing.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="carousel-item">
-                    <video class="carousel-video video-90" controls muted loop playsinline>
-                    <source src="./videos/train.mp4" type="video/mp4">
-                    </video>
-                </div>
-                </div>
-                <!-- Updated controls (using Font Awesome for arrows) -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#resultsCarousel" data-bs-slide="prev">
-                    <i class="bi bi-arrow-left-circle-fill" style="font-size: 2rem; color: white;"></i>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#resultsCarousel" data-bs-slide="next">
-                    <i class="bi bi-arrow-right-circle-fill" style="font-size: 2rem; color: white;"></i>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
     </div>
 
-
-    <div class="row" style="margin-top:40px;">
-        <div class="col-md-8 offset-md-2">
-            <h3>Performance</h3>
-            <div class="text-center">
-                <img src="img/table.png" alt="Architecture Diagram" style="width: 100%; margin-top: 20px;">
-            </div>
-            <p class="text-justify">
-                <strong>Quantitative results of affine-invariant video depth on TAPVid-3D minival split</strong>
-            </p>
-            <ul class="text-justify"></ul>
-                <li>Our model significantly surpasses the strong video depth model and point tracker baseline.</li>
-            </ul>
+    <!-- Method -->
+    <div class="row mb-5">
+      <div class="col-md-8 offset-md-2">
+        <h3>Method</h3>
+        <div class="text-center">
+          <img src="img/Arch_ProjectPage.png" alt="Architecture Diagram" class="img-fluid mt-3">
         </div>
-      </div>
-
-    
-    <div class="row" style="margin-top:40px;">
-    <div class="col-md-8 offset-md-2">
-        <h3>Reference</h3>
-        <ul class="text-justify"></ul>
-            <li><a href="https://tapvid3d.github.io">TAPVid-3D</a> is a benchmark for evaluating 3D point tracking, </li>
-            <li><a href="https://cvlab-kaist.github.io/locotrack/">LocoTrack</a> is light-weight and precise point tracker achieved with local 4D correlation.</li>
-            <li><a href="https://co-tracker.github.io">CoTracker</a> is a strong point tracker that tracks the point together, </li>
+        <ul class="mt-3 text-justify">
+          <li>Use an <strong>off-the-shelf point tracker</strong> to extract 2D trajectories of query points and a dense supporting grid.</li>
+          <li>Process these trajectories with <strong>a temporal transformer</strong> and <strong>a spatial transformer</strong> in two separate branches.</li>
+          <li>Inject motion information encoded by the supporting branch into the query branch via cross-attention.</li>
+          <li>Finally, use two regression heads to output ratio depths of both supporting and query trajectories.</li>
         </ul>
-    </div>
+      </div>
     </div>
 
+    <!-- Visualization carousel -->
+    <div class="row mb-5">
+      <div class="col-md-8 offset-md-2">
+        <h3>Visualization on DAVIS Dataset</h3>
+        <div id="resultsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <video class="carousel-video video-90" controls muted loop playsinline>
+                <source src="./videos/bear.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="carousel-item">
+              <video class="carousel-video video-90" controls muted loop playsinline>
+                <source src="./videos/breakdance.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="carousel-item">
+              <video class="carousel-video video-90" controls muted loop playsinline>
+                <source src="./videos/dance.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="carousel-item">
+              <video class="carousel-video video-90" controls muted loop playsinline>
+                <source src="./videos/horsejump.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="carousel-item">
+              <video class="carousel-video video-90" controls muted loop playsinline>
+                <source src="./videos/rhino.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="carousel-item">
+              <video class="carousel-video video-90" controls muted loop playsinline>
+                <source src="./videos/skate.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="carousel-item">
+              <video class="carousel-video video-90" controls muted loop playsinline>
+                <source src="./videos/stroller.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="carousel-item">
+              <video class="carousel-video video-90" controls muted loop playsinline>
+                <source src="./videos/swing.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="carousel-item">
+              <video class="carousel-video video-90" controls muted loop playsinline>
+                <source src="./videos/train.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#resultsCarousel" data-bs-slide="prev">
+            <i class="bi bi-arrow-left-circle-fill fs-2 text-white"></i>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#resultsCarousel" data-bs-slide="next">
+            <i class="bi bi-arrow-right-circle-fill fs-2 text-white"></i>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
-    <div class="row" style="margin-top:20px;">
+    <!-- Performance -->
+    <div class="row mb-5">
+      <div class="col-md-8 offset-md-2">
+        <h3>Performance</h3>
+        <div class="text-center">
+          <img src="img/table.png" alt="Quantitative Results" class="img-fluid mt-3">
+        </div>
+        <p class="text-justify mt-3">
+          <strong>Quantitative results of affine-invariant video depth on TAPVid-3D minival split</strong>
+        </p>
+        <ul class="text-justify">
+          <li>Our model significantly surpasses the strong video depth model and point tracker baseline.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Reference -->
+    <div class="row mb-5">
+      <div class="col-md-8 offset-md-2">
+        <h3>Reference</h3>
+        <ul class="text-justify">
+          <li><a href="https://tapvid3d.github.io">TAPVid-3D</a> is a benchmark for evaluating 3D point tracking, consists of Aria, DriveTrack and Panoptic Studio.</li>
+          <li><a href="https://cvlab-kaist.github.io/locotrack/">LocoTrack</a> is a lightweight and precise point tracker achieved with local 4D correlation.</li>
+          <li><a href="https://co-tracker.github.io">CoTracker</a> is a strong point tracker that tracks points together.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Citation -->
+    <div class="row mb-5">
       <div class="col-md-8 offset-md-2">
         <h3>Citation</h3>
         <div class="form-group col-md-10 offset-md-1">
@@ -286,20 +294,8 @@ TBD
       </div>
     </div>
 
-    <!-- References section (optional)
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <h3>References</h3>
-        <div class="text-justify">
-          <p><a name="ref1"></a>[1] Doersch et al., "Tapir: Tracking any point with per-frame initialization and temporal refinement", CVPR 2023.</p>
-          <p><a name="ref2"></a>[2] Karaev et al., "CoTracker: It is Better to Track Together", ECCV 2024.</p>
-        </div>
-        <br>
-      </div>
-    </div>
-    -->
-
-    <div class="row" style="margin-top:20px;">
+    <!-- Acknowledgements -->
+    <div class="row mb-5">
       <div class="col-md-8 offset-md-2">
         <h3>Acknowledgements</h3>
         <p class="text-justify">
