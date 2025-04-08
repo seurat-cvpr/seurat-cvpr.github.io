@@ -135,23 +135,54 @@
       </div>
     </div>
 
-    <div class="row" style="margin-top:20px;">
+    <div class="row" style="margin-top:40px;">
+        <div class="col-md-8 offset-md-2">
+          <h3>Abstract</h3>
+          <p class="text-justify">
+            Accurate depth estimation from monocular videos remains challenging due to ambiguities inherent in single-view geometry, as crucial depth cues like stereopsis are absent. However, humans often perceive relative depth intuitively by observing variations in the size and spacing of objects as they move. Inspired by this, we propose a novel method that infers relative depth by examining the spatial relationships and temporal evolution of a set of tracked 2D trajectories. Specifically, we use off-the-shelf point tracking models to capture 2D trajectories. Then, our approach employs spatial and temporal transformers to process these trajectories and directly infer depth changes over time. Evaluated on the TAPVid-3D benchmark, our method demonstrates <strong>robust zero-shot performance</strong>, generalizing effectively from synthetic to real-world datasets. Results indicate that our approach achieves temporally smooth, high-accuracy depth predictions across diverse domains.
+          </p>
+        </div>
+      </div>
+
+    <div class="row" style="margin-top:40px;">
       <div class="col-md-8 offset-md-2">
         <h3>Motivation</h3>
-        <p class="text-justify">
-          By only looking at the tracked points, we can easily perceive that the object (here, a car) is moving away.
-        </p>
         <div style="border: 2px solid lightgray; padding: 2px; display: inline-block;">
             <video class="autoplay-video" controls muted loop playsinline width="100%">
                 <source src="videos/car-moves.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
+        
+        <p class="text-center">
+            Can you tell whether the object is moving farther or closer just by looking at the trajectory?
+            <br>
+            By only looking at the tracked points (right), we can easily perceive that the object (here, a car) is moving away.
+        </br><strong style="color: #ff5733;">If we can, so can our model!</strong>
+        </p>
       </div>
     </div>
 
+
+    <div class="row" style="margin-top:40px;">
+        <div class="col-md-8 offset-md-2">
+            <h3>Method</h3>
+            <div class="text-center">
+                <img src="img/Arch_ProjectPage.png" alt="Architecture Diagram" style="width: 100%; margin-top: 20px;">
+            </div>
+
+            <ul class="text-justify"></ul>
+                <li>Use an <strong>off-the-shelf point tracker</strong> to extract 2D trajectories of query points and a dense supporting grid.</li>
+                <li>Process these trajectories with <strong>a temporal transformer</strong> and <strong>a spatial transformer</strong> in two separate branches.</li>
+                <li>Inject motion information encoded by the supporting branch into the query branch via cross-attention.</li>
+                <li>Finally, use two regression heads to output ratio depths of both supporting and query trajectories.</li>
+            </ul>
+        </div>
+      </div>
+
+
     <!-- Updated carousel markup -->
-    <div class="row" style="margin-top: 20px;">
+    <div class="row" style="margin-top: 40px;">
         <div class="col-md-8 offset-md-2">
             <h3>Visualization on DAVIS Dataset</h3>
             <div id="resultsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
@@ -214,6 +245,35 @@
             </div>
         </div>
     </div>
+
+
+    <div class="row" style="margin-top:40px;">
+        <div class="col-md-8 offset-md-2">
+            <h3>Performance</h3>
+            <div class="text-center">
+                <img src="img/table.png" alt="Architecture Diagram" style="width: 100%; margin-top: 20px;">
+            </div>
+            <p class="text-justify">
+                <strong>Quantitative results of affine-invariant video depth on TAPVid-3D minival split</strong>
+            </p>
+            <ul class="text-justify"></ul>
+                <li>Our model significantly surpasses the strong video depth model and point tracker baseline.</li>
+            </ul>
+        </div>
+      </div>
+
+    
+    <div class="row" style="margin-top:40px;">
+    <div class="col-md-8 offset-md-2">
+        <h3>Reference</h3>
+        <ul class="text-justify"></ul>
+            <li><a href="https://tapvid3d.github.io">TAPVid-3D</a> is a benchmark for evaluating 3D point tracking, </li>
+            <li><a href="https://cvlab-kaist.github.io/locotrack/">LocoTrack</a> is light-weight and precise point tracker achieved with local 4D correlation.</li>
+            <li><a href="https://co-tracker.github.io">CoTracker</a> is a strong point tracker that tracks the point together, </li>
+        </ul>
+    </div>
+    </div>
+
 
     <div class="row" style="margin-top:20px;">
       <div class="col-md-8 offset-md-2">
